@@ -150,8 +150,10 @@ animal* animal::In(ifstream &ifst) {
 
 void animal::InData(ifstream &ifst) {
 	ifst.getline(name,256);
+	ifst >> age;
 }
 
 void animal::Out(ofstream &ofst) {
-	ofst << "It is " << name << ". ";
+	ofst << "It is " << name << ". " << endl;
+	ofst << "It is " << age << " years old." << endl;
 }

@@ -8,6 +8,7 @@ using namespace std;
 class animal {
 public:
 	char name[256];
+	int age;
 	// идентификация, порождение и ввод фигуры из потока
 	static  animal* In(ifstream &ifst);
 	virtual void InData(ifstream &ifst) = 0; // ввод
