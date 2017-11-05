@@ -22,6 +22,7 @@ void container::Out(ofstream &ofst)
 	for (int i = 0; i < len; i++) {
 		ofst << i + 1<< ": ";
 		cont[i]->Out(ofst);
+		ofst << "length of name = " << cont[i]->LengthOfName() << "." << endl;
 	}
 }
 
@@ -118,4 +119,8 @@ void animal::InData(ifstream &ifst) {
 
 void animal::Out(ofstream &ofst) {
 	ofst << "It is " << name << ". ";
+}
+
+int animal::LengthOfName() {
+	return strlen(name);
 }
