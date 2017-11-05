@@ -33,6 +33,16 @@ public:
 	bird() {} // создание без инициализации.
 };
 
+class beast : public animal {
+public:
+	enum type { PREDATOR, HERBIVORE, INSECTIVORE };; // место проживания
+	type t;
+	// переопределяем интерфейс класса
+	void InData(ifstream &ifst);  // ввод 
+	void Out(ofstream &ofst);     // вывод 
+	beast() {} // создание без инициализации.
+};
+
 // Простейший контейнер на основе одномерного массива
 class container {
 	enum { max_len = 100 }; // максимальная длина

@@ -92,6 +92,39 @@ void bird::Out(ofstream &ofst) {
 	ofst << "migratory." << endl;
 }
 
+void beast::InData(ifstream &ifst) {
+	animal::InData(ifst);
+	int k;
+	ifst >> k;
+	switch (k) {
+	case 1:
+		t = beast::type::PREDATOR;
+		break;
+	case 2:
+		t = beast::type::HERBIVORE;
+		break;
+	case 3:
+		t = beast::type::INSECTIVORE;
+		break;
+	}
+}
+
+void beast::Out(ofstream &ofst) {
+	animal::Out(ofst);
+	ofst << "It is beast. It is ";
+	switch (t) {
+	case beast::type::PREDATOR:
+		ofst << "predator." << endl;
+		break;
+	case beast::type::HERBIVORE:
+		ofst << "herbivore." << endl;
+		break;
+	case beast::type::INSECTIVORE:
+		ofst << "insectivore." << endl;
+		break;
+	}
+}
+
 animal* animal::In(ifstream &ifst) {
 	animal *a;
 	int k;
@@ -104,6 +137,9 @@ animal* animal::In(ifstream &ifst) {
 		break;
 	case 2:
 		a = new bird;
+		break;
+	case 3:
+		a = new beast;
 		break;
 	default:
 		return 0;
