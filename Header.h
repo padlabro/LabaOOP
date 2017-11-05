@@ -15,6 +15,9 @@ public:
 	virtual void Out(ofstream &ofst) = 0;    // вывод 
 	int LengthOfName();
 	bool Compare(animal &other);
+	virtual void OutFish(ofstream &ofst);
+	virtual void OutBird(ofstream &ofst);
+	virtual void OutBeast(ofstream &ofst);
 };
 
 class fish : public animal {
@@ -24,6 +27,7 @@ public:
 	// переопределяем интерфейс класса
 	void InData(ifstream &ifst);  // ввод 
 	void Out(ofstream &ofst);     // вывод 
+	void OutFish(ofstream &ofst);
 	fish() {} // создание без инициализации.
 };
 
@@ -32,7 +36,8 @@ public:
 	bool migratory; // перелетные или нет
 	// переопределяем интерфейс класса
 	void InData(ifstream &ifst);  // ввод 
-	void Out(ofstream &ofst);     // вывод 
+	void Out(ofstream &ofst);     // вывод
+	void OutBird(ofstream &ofst);
 	bird() {} // создание без инициализации.
 };
 
@@ -43,6 +48,7 @@ public:
 	// переопределяем интерфейс класса
 	void InData(ifstream &ifst);  // ввод 
 	void Out(ofstream &ofst);     // вывод 
+	void OutBeast(ofstream &ofst);
 	beast() {} // создание без инициализации.
 };
 
@@ -57,6 +63,9 @@ public:
 
 	void In(ifstream &ifst);  // ввод фигур
 	void Out(ofstream &ofst);  // вывод фигур
+	void OutFish(ofstream &ofst);
+	void OutBird(ofstream &ofst);
+	void OutBeast(ofstream &ofst);
 	void Clear();  // очистка контейнера от фигур
 	void Sort(); // сортировка контейнера
 };

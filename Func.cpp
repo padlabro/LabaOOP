@@ -47,6 +47,30 @@ void container::Sort() {
 	}
 }
 
+void container::OutFish(ofstream &ofst) {
+	ofst << "Only fishes." << endl;
+	for (int i = 0; i < len; i++) {
+		ofst << i+1 << ": ";
+		cont[i]->OutFish(ofst);
+	}
+}
+
+void container::OutBird(ofstream &ofst) {
+	ofst << "Only birds." << endl;
+	for (int i = 0; i < len; i++) {
+		ofst << i+1 << ": ";
+		cont[i]->OutBird(ofst);
+	}
+}
+
+void container::OutBeast(ofstream &ofst) {
+	ofst << "Only beast." << endl;
+	for (int i = 0; i < len; i++) {
+		ofst << i+1 << ": ";
+		cont[i]->OutBeast(ofst);
+	}
+}
+
 void fish::InData(ifstream &ifst) {
 	animal::InData(ifst);
 	int k;
@@ -80,6 +104,10 @@ void fish::Out(ofstream &ofst) {
 	}
 }
 
+void fish::OutFish(ofstream &ofst) {
+	Out(ofst);
+}
+
 void bird::InData(ifstream &ifst) {
 	animal::InData(ifst);
 	int k;
@@ -105,6 +133,10 @@ void bird::Out(ofstream &ofst) {
 		break;
 	}
 	ofst << "migratory." << endl;
+}
+
+void bird::OutBird(ofstream &ofst) {
+	Out(ofst);
 }
 
 void beast::InData(ifstream &ifst) {
@@ -138,6 +170,10 @@ void beast::Out(ofstream &ofst) {
 		ofst << "insectivore." << endl;
 		break;
 	}
+}
+
+void beast::OutBeast(ofstream &ofst) {
+	Out(ofst);
 }
 
 animal* animal::In(ifstream &ifst) {
@@ -179,4 +215,16 @@ int animal::LengthOfName() {
 
 bool animal::Compare(animal &other) {
 	return LengthOfName() < other.LengthOfName();
+}
+
+void animal::OutFish(ofstream &ofst) {
+	ofst << endl; // пустая строка
+}
+
+void animal::OutBird(ofstream &ofst) {
+	ofst << endl; // пустая строка
+}
+
+void animal::OutBeast(ofstream &ofst) {
+	ofst << endl; // пустая строка
 }

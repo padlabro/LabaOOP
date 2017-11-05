@@ -25,6 +25,10 @@ int main(int argc, char* argv[]) {
 	ofst << "Filled container. " << endl;
 	c.Sort();
 	c.Out(ofst);
+	
+	ofst << "Only fishes. " << endl;
+	c.OutFish(ofst);
+
 
 	c.Clear();
 	ofst << "Empty container. " << endl;
