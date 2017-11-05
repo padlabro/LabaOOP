@@ -33,6 +33,20 @@ void container::Clear() {
 	len = 0;
 }
 
+//-----------------------------------------------------
+// Сортировка содержимого контейнера
+void container::Sort() {
+	for (int i = 0; i < len - 1; i++) {
+		for (int j = i + 1; j < len; j++) {
+			if (cont[i]->Compare(*cont[j])) {
+				animal *tmp = cont[i];
+				cont[i] = cont[j];
+				cont[j] = tmp;
+			}
+		}
+	}
+}
+
 void fish::InData(ifstream &ifst) {
 	animal::InData(ifst);
 	int k;
@@ -123,4 +137,8 @@ void animal::Out(ofstream &ofst) {
 
 int animal::LengthOfName() {
 	return strlen(name);
+}
+
+bool animal::Compare(animal &other) {
+	return LengthOfName() < other.LengthOfName();
 }
