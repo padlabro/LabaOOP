@@ -13,6 +13,8 @@ public:
 	static  animal* In(ifstream &ifst);
 	virtual void InData(ifstream &ifst) = 0; // ввод
 	virtual void Out(ofstream &ofst) = 0;    // вывод 
+	int LengthOfName();
+	bool Compare(animal &other);
 };
 
 class fish : public animal {
@@ -56,4 +58,5 @@ public:
 	void In(ifstream &ifst);  // ввод фигур
 	void Out(ofstream &ofst);  // вывод фигур
 	void Clear();  // очистка контейнера от фигур
+	void Sort(); // сортировка контейнера
 };

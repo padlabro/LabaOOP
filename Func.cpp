@@ -22,6 +22,7 @@ void container::Out(ofstream &ofst)
 	for (int i = 0; i < len; i++) {
 		ofst << i + 1<< ": ";
 		cont[i]->Out(ofst);
+		ofst << "length of name = " << cont[i]->LengthOfName() << "." << endl;
 	}
 }
 
@@ -30,6 +31,20 @@ void container::Clear() {
 		delete cont[i];
 	}
 	len = 0;
+}
+
+//-----------------------------------------------------
+// Сортировка содержимого контейнера
+void container::Sort() {
+	for (int i = 0; i < len - 1; i++) {
+		for (int j = i + 1; j < len; j++) {
+			if (cont[i]->Compare(*cont[j])) {
+				animal *tmp = cont[i];
+				cont[i] = cont[j];
+				cont[j] = tmp;
+			}
+		}
+	}
 }
 
 void fish::InData(ifstream &ifst) {
@@ -156,4 +171,12 @@ void animal::InData(ifstream &ifst) {
 void animal::Out(ofstream &ofst) {
 	ofst << "It is " << name << ". " << endl;
 	ofst << "It is " << age << " years old." << endl;
+}
+
+int animal::LengthOfName() {
+	return strlen(name);
+}
+
+bool animal::Compare(animal &other) {
+	return LengthOfName() < other.LengthOfName();
 }
