@@ -12,6 +12,8 @@ public:
 	static  animal* In(ifstream &ifst);
 	virtual void InData(ifstream &ifst) = 0; // ввод
 	virtual void Out(ofstream &ofst) = 0;    // вывод 
+	virtual void OutFish(ofstream &ofst);
+	virtual void OutBird(ofstream &ofst);
 };
 
 class fish : public animal {
@@ -21,6 +23,7 @@ public:
 	// переопределяем интерфейс класса
 	void InData(ifstream &ifst);  // ввод 
 	void Out(ofstream &ofst);     // вывод 
+	void OutFish(ofstream &ofst);
 	fish() {} // создание без инициализации.
 };
 
@@ -29,7 +32,8 @@ public:
 	bool migratory; // перелетные или нет
 	// переопределяем интерфейс класса
 	void InData(ifstream &ifst);  // ввод 
-	void Out(ofstream &ofst);     // вывод 
+	void Out(ofstream &ofst);     // вывод
+	void OutBird(ofstream &ofst);
 	bird() {} // создание без инициализации.
 };
 
@@ -44,5 +48,7 @@ public:
 
 	void In(ifstream &ifst);  // ввод фигур
 	void Out(ofstream &ofst);  // вывод фигур
+	void OutFish(ofstream &ofst);
+	void OutBird(ofstream &ofst);
 	void Clear();  // очистка контейнера от фигур
 };
