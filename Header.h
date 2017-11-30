@@ -5,7 +5,8 @@
 
 using namespace std;
 
-class animal {
+class animal 
+{
 public:
 	char name[256];
 	int age;
@@ -20,7 +21,8 @@ public:
 	virtual void OutBeast(ofstream &ofst);
 };
 
-class fish : public animal {
+class fish : public animal 
+{
 public:
 	enum habitat { RIVER, SEA, LAKE };; // место проживания
 	habitat h;
@@ -31,7 +33,8 @@ public:
 	fish() {} // создание без инициализации.
 };
 
-class bird : public animal {
+class bird : public animal
+{
 public:
 	bool migratory; // перелетные или нет
 	// переопределяем интерфейс класса
@@ -41,7 +44,8 @@ public:
 	bird() {} // создание без инициализации.
 };
 
-class beast : public animal {
+class beast : public animal 
+{
 public:
 	enum type { PREDATOR, HERBIVORE, INSECTIVORE };; // место проживания
 	type t;
@@ -53,7 +57,8 @@ public:
 };
 
 // Простейший контейнер на основе одномерного массива
-class container {
+class container 
+{
 public:
 	enum { max_len = 100 }; // максимальная длина
 	int len; // текущая длина

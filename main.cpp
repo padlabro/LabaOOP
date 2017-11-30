@@ -7,9 +7,11 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) 
+{
 
-	if (argc != 3) {
+	if (argc != 3) 
+	{
 		cout << "incorrect command line! Waited: command in_file out_file" << endl;
 		exit(1);
 	}
