@@ -1,0 +1,11 @@
+Container contents 3 elements.
+1: It is Sinica. 
+It is 4 years old.
+It is bird. It is migratory.
+length of name = 6.
+2: It is Tiger. 
+It is 4 years old.
+It is beast. It is length of name = 5.
+3: It is Okun. 
+It is 4 years old.
+It is fish. It lives in length of name = 4.

@@ -54,6 +54,7 @@ public:
 
 // ѕростейший контейнер на основе одномерного массива
 class container {
+public:
 	enum { max_len = 100 }; // максимальна€ длина
 	int len; // текуща€ длина
 	animal *cont[max_len];
