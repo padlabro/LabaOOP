@@ -357,3 +357,81 @@ void animal::OutBeast(ofstream &ofst)
 	CheckOutputFile(ofst);
 	ofst << endl; // пустая строка
 }
+
+void fish::MultiMethod(animal *other, ofstream &ofst)
+{
+	other->MMFish(ofst);
+}
+
+void fish::MMFish(ofstream &ofst) 
+{
+	ofst << endl << "Fish and Fish" << endl << endl;
+}
+
+void fish::MMBird(ofstream &ofst) 
+{
+	ofst << endl << "Bird and Fish" << endl << endl;
+}
+
+void fish::MMBeast(ofstream &ofst) 
+{
+	ofst << endl << "Beast and Fish" << endl << endl;
+}
+
+void bird::MultiMethod(animal *other, ofstream &ofst) 
+{
+	other->MMBird(ofst);
+}
+
+void bird::MMFish(ofstream &ofst) 
+{
+	ofst << endl << "Fish and Bird" << endl << endl;
+}
+
+void bird::MMBird(ofstream &ofst) 
+{
+	ofst << endl << "Bird and Bird" << endl << endl;
+}
+
+void bird::MMBeast(ofstream &ofst)
+{
+	ofst << endl << "Beast and Bird" << endl << endl;
+}
+
+void beast::MultiMethod(animal *other, ofstream &ofst) 
+{
+	other->MMBeast(ofst);
+}
+
+void beast::MMFish(ofstream &ofst) 
+{
+	ofst << endl << "Fish and Beast" << endl << endl;
+}
+
+void beast::MMBird(ofstream &ofst) 
+{
+	ofst << endl << "Bird and Beast" << endl << endl;
+}
+
+void beast::MMBeast(ofstream &ofst) 
+{
+	ofst << endl << "Beast and Beast" << endl << endl;
+}
+
+void container::MultiMethod(ofstream &ofst) 
+{
+	ofst << "Multimethod." << endl;
+	animal *a1;
+	animal *a2;
+	for (int i = 0; i < len; i++) 
+	{
+		a1 = cont[i];
+		for (int j = 0; j < len; j++) 
+		{
+			a2 = cont[j];
+			a1->MultiMethod(a2, ofst);
+			a1->Out(ofst);
+			a2->Out(ofst);
+		}
+	}
+}
