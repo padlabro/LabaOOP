@@ -3,12 +3,14 @@
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
+#include "Protect.h"
 
 using namespace std;
 
 container::container() : len(0) { }
 
 void container::In(ifstream &ifst) {
+	CheckInputFile(ifst);
 	while (!ifst.eof() && max_len != len) {
 		if ((cont[len] = animal::In(ifst)) != 0) {
 			len++;
@@ -18,7 +20,12 @@ void container::In(ifstream &ifst) {
 
 void container::Out(ofstream &ofst)
 {
-	ofst << "Container contents " << len << " elements." << endl;
+	CheckOutputFile(ofst);
+	if (len)
+		ofst << "Container contains " << len << " elements." << endl;
+	else
+		ofst << "Container is empty:\n";
+
 	for (int i = 0; i < len; i++) {
 		ofst << i + 1<< ": ";
 		cont[i]->Out(ofst);
@@ -48,7 +55,14 @@ void container::Sort() {
 }
 
 void container::OutFish(ofstream &ofst) {
-	ofst << "Only fishes." << endl;
+	CheckOutputFile(ofst);
+	if (len) {
+		ofst << "Container contains " << len << " elements." << endl;
+		ofst << "Only fishes." << endl;
+	}
+	else
+		ofst << "Container is empty:\n";
+
 	for (int i = 0; i < len; i++) {
 		ofst << i+1 << ": ";
 		cont[i]->OutFish(ofst);
@@ -56,7 +70,14 @@ void container::OutFish(ofstream &ofst) {
 }
 
 void container::OutBird(ofstream &ofst) {
-	ofst << "Only birds." << endl;
+	CheckOutputFile(ofst);
+	if (len) {
+		ofst << "Container contains " << len << " elements." << endl;
+		ofst << "Only birds." << endl;
+	}
+	else
+		ofst << "Container is empty:\n";
+	
 	for (int i = 0; i < len; i++) {
 		ofst << i+1 << ": ";
 		cont[i]->OutBird(ofst);
@@ -64,7 +85,14 @@ void container::OutBird(ofstream &ofst) {
 }
 
 void container::OutBeast(ofstream &ofst) {
-	ofst << "Only beast." << endl;
+	CheckOutputFile(ofst);
+	if (len) {
+		ofst << "Container contains " << len << " elements." << endl;
+		ofst << "Only beasts." << endl;
+	}
+	else
+		ofst << "Container is empty:\n";
+	
 	for (int i = 0; i < len; i++) {
 		ofst << i+1 << ": ";
 		cont[i]->OutBeast(ofst);
@@ -72,9 +100,16 @@ void container::OutBeast(ofstream &ofst) {
 }
 
 void fish::InData(ifstream &ifst) {
+	CheckInputFile(ifst);
 	animal::InData(ifst);
 	int k;
 	ifst >> k;
+	CheckWrongInput(ifst);
+	if (!(1 <= k && k <= 3))
+	{
+		cerr << "Error: unknown type" << endl;
+		exit(1);
+	}
 	switch (k) {
 	case 1:
 		h = fish::habitat::RIVER;
@@ -85,10 +120,14 @@ void fish::InData(ifstream &ifst) {
 	case 3:
 		h = fish::habitat::LAKE;
 		break;
+	default:
+		cout << "Error! Unknown habitat!" << endl;
+		break;
 	}
 }
 
 void fish::Out(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	animal::Out(ofst);
 	ofst << "It is fish. It lives in ";
 	switch (h) {
@@ -101,17 +140,28 @@ void fish::Out(ofstream &ofst) {
 	case fish::habitat::LAKE:
 		ofst << "lake." << endl;
 		break;
+	default:
+		cout << "Error! Unknown habitat!" << endl;
+		break;
 	}
 }
 
 void fish::OutFish(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	Out(ofst);
 }
 
 void bird::InData(ifstream &ifst) {
+	CheckInputFile(ifst);
 	animal::InData(ifst);
 	int k;
 	ifst >> k;
+	CheckWrongInput(ifst);
+	if (!(0 <= k && k <= 1))
+	{
+		cerr << "Error: unknown type" << endl;
+		exit(1);
+	}
 	switch (k) {
 	case 0:
 		migratory = false;
@@ -119,10 +169,14 @@ void bird::InData(ifstream &ifst) {
 	case 1:
 		migratory = true;
 		break;
+	default:
+		cout << "Error! Unknown migratory!" << endl;
+		break;
 	}
 }
 
 void bird::Out(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	animal::Out(ofst);
 	ofst << "It is bird. It is ";
 	switch (migratory) {
@@ -136,13 +190,21 @@ void bird::Out(ofstream &ofst) {
 }
 
 void bird::OutBird(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	Out(ofst);
 }
 
 void beast::InData(ifstream &ifst) {
+	CheckInputFile(ifst);
 	animal::InData(ifst);
 	int k;
 	ifst >> k;
+	CheckWrongInput(ifst);
+	if (!(1 <= k && k <= 3))
+	{
+		cerr << "Error: unknown type" << endl;
+		exit(1);
+	}
 	switch (k) {
 	case 1:
 		t = beast::type::PREDATOR;
@@ -153,10 +215,14 @@ void beast::InData(ifstream &ifst) {
 	case 3:
 		t = beast::type::INSECTIVORE;
 		break;
+	default:
+		cout << "Error! Unknown type!" << endl;
+		break;
 	}
 }
 
 void beast::Out(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	animal::Out(ofst);
 	ofst << "It is beast. It is ";
 	switch (t) {
@@ -169,19 +235,31 @@ void beast::Out(ofstream &ofst) {
 	case beast::type::INSECTIVORE:
 		ofst << "insectivore." << endl;
 		break;
+	default:
+		cout << "Error! Unknown type!" << endl;
+		break;
 	}
 }
 
 void beast::OutBeast(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	Out(ofst);
 }
 
 animal* animal::In(ifstream &ifst) {
+	CheckInputFile(ifst);
 	animal *a;
 	int k;
 	ifst >> k;
+	CheckWrongInput(ifst);
+	if (!(1 <= k && k <= 3))
+	{
+		cerr << "Error: unknown type" << endl;
+		exit(1);
+	}
 	char t[256];
 	ifst.getline(t, 256);
+	CheckWrongInput(ifst);
 	switch (k) {
 	case 1:
 		a = new fish;
@@ -200,11 +278,16 @@ animal* animal::In(ifstream &ifst) {
 }
 
 void animal::InData(ifstream &ifst) {
+	CheckInputFile(ifst);
 	ifst.getline(name,256);
+	CheckWrongInput(ifst);
 	ifst >> age;
+	CheckWrongInput(ifst);
+	CheckAge(age);
 }
 
 void animal::Out(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	ofst << "It is " << name << ". " << endl;
 	ofst << "It is " << age << " years old." << endl;
 }
@@ -218,13 +301,16 @@ bool animal::Compare(animal &other) {
 }
 
 void animal::OutFish(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	ofst << endl; // пустая строка
 }
 
 void animal::OutBird(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	ofst << endl; // пустая строка
 }
 
 void animal::OutBeast(ofstream &ofst) {
+	CheckOutputFile(ofst);
 	ofst << endl; // пустая строка
 }
