@@ -377,7 +377,7 @@ TEST_F(ContainerTest, CheckSort)
 	c.cont[c.len] = (animal *)be;
 	++c.len;
 
-	c.Sort();
+	c.Sort(0);
 	c.Out(ofst);
 	ofst.close();
 
@@ -393,7 +393,7 @@ TEST_F(ContainerTest, CheckSortEmpty)
 
 	container c;
 
-	c.Sort();
+	c.Sort(0);
 	c.Out(ofst);
 	ofst.close();
 
@@ -421,7 +421,7 @@ TEST_F(ContainerTest, CheckSortEqual)
 	c.cont[c.len] = be;
 	++c.len;
 
-	c.Sort();
+	c.Sort(0);
 	c.Out(ofst);
 	ofst.close();
 

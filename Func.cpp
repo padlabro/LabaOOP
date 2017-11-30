@@ -21,7 +21,7 @@ void container::In(ifstream &ifst)
 	}
 }
 
-void container::Out(ofstream &ofst)
+void container::Out(ostream &ofst)
 {
 	CheckOutputFile(ofst);
 	if (len)
@@ -48,23 +48,39 @@ void container::Clear()
 
 //-----------------------------------------------------
 // Сортировка содержимого контейнера
-void container::Sort() 
+void container::Sort(int d) 
 {
 	for (int i = 0; i < len - 1; i++)
 	{
 		for (int j = i + 1; j < len; j++) 
 		{
-			if (cont[i]->Compare(*cont[j]))
+			switch (d)
 			{
-				animal *tmp = cont[i];
-				cont[i] = cont[j];
-				cont[j] = tmp;
+			case 0:
+				if (cont[i]->Compare(*cont[j]))
+				{
+					animal *tmp = cont[i];
+					cont[i] = cont[j];
+					cont[j] = tmp;
+				}
+				break;
+			case 1:
+				if (!cont[i]->Compare(*cont[j]))
+				{
+					animal *tmp = cont[i];
+					cont[i] = cont[j];
+					cont[j] = tmp;
+				}
+				break;
+			default:
+				cerr << "Inknown d in sort function!" << endl;
+				exit(1);
 			}
 		}
 	}
 }
 
-void container::OutFish(ofstream &ofst) 
+void container::OutFish(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	if (len) 
@@ -82,7 +98,7 @@ void container::OutFish(ofstream &ofst)
 	}
 }
 
-void container::OutBird(ofstream &ofst) 
+void container::OutBird(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	if (len) 
@@ -100,7 +116,7 @@ void container::OutBird(ofstream &ofst)
 	}
 }
 
-void container::OutBeast(ofstream &ofst) 
+void container::OutBeast(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	if (len) 
@@ -147,7 +163,7 @@ void fish::InData(ifstream &ifst)
 	}
 }
 
-void fish::Out(ofstream &ofst) 
+void fish::Out(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	animal::Out(ofst);
@@ -169,7 +185,7 @@ void fish::Out(ofstream &ofst)
 	}
 }
 
-void fish::OutFish(ofstream &ofst) 
+void fish::OutFish(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	Out(ofst);
@@ -201,7 +217,7 @@ void bird::InData(ifstream &ifst)
 	}
 }
 
-void bird::Out(ofstream &ofst)
+void bird::Out(ostream &ofst)
 {
 	CheckOutputFile(ofst);
 	animal::Out(ofst);
@@ -217,7 +233,7 @@ void bird::Out(ofstream &ofst)
 	ofst << "migratory." << endl;
 }
 
-void bird::OutBird(ofstream &ofst) 
+void bird::OutBird(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	Out(ofst);
@@ -252,7 +268,7 @@ void beast::InData(ifstream &ifst)
 	}
 }
 
-void beast::Out(ofstream &ofst) 
+void beast::Out(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	animal::Out(ofst);
@@ -274,7 +290,7 @@ void beast::Out(ofstream &ofst)
 	}
 }
 
-void beast::OutBeast(ofstream &ofst)
+void beast::OutBeast(ostream &ofst)
 {
 	CheckOutputFile(ofst);
 	Out(ofst);
@@ -323,7 +339,7 @@ void animal::InData(ifstream &ifst)
 	CheckAge(age);
 }
 
-void animal::Out(ofstream &ofst) 
+void animal::Out(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	ofst << "It is " << name << ". " << endl;
@@ -340,85 +356,85 @@ bool animal::Compare(animal &other)
 	return LengthOfName() < other.LengthOfName();
 }
 
-void animal::OutFish(ofstream &ofst) 
+void animal::OutFish(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	ofst << endl; // пустая строка
 }
 
-void animal::OutBird(ofstream &ofst) 
+void animal::OutBird(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	ofst << endl; // пустая строка
 }
 
-void animal::OutBeast(ofstream &ofst) 
+void animal::OutBeast(ostream &ofst) 
 {
 	CheckOutputFile(ofst);
 	ofst << endl; // пустая строка
 }
 
-void fish::MultiMethod(animal *other, ofstream &ofst)
+void fish::MultiMethod(animal *other, ostream &ofst)
 {
 	other->MMFish(ofst);
 }
 
-void fish::MMFish(ofstream &ofst) 
+void fish::MMFish(ostream &ofst) 
 {
 	ofst << endl << "Fish and Fish" << endl << endl;
 }
 
-void fish::MMBird(ofstream &ofst) 
+void fish::MMBird(ostream &ofst) 
 {
 	ofst << endl << "Bird and Fish" << endl << endl;
 }
 
-void fish::MMBeast(ofstream &ofst) 
+void fish::MMBeast(ostream &ofst) 
 {
 	ofst << endl << "Beast and Fish" << endl << endl;
 }
 
-void bird::MultiMethod(animal *other, ofstream &ofst) 
+void bird::MultiMethod(animal *other, ostream &ofst) 
 {
 	other->MMBird(ofst);
 }
 
-void bird::MMFish(ofstream &ofst) 
+void bird::MMFish(ostream &ofst) 
 {
 	ofst << endl << "Fish and Bird" << endl << endl;
 }
 
-void bird::MMBird(ofstream &ofst) 
+void bird::MMBird(ostream &ofst) 
 {
 	ofst << endl << "Bird and Bird" << endl << endl;
 }
 
-void bird::MMBeast(ofstream &ofst)
+void bird::MMBeast(ostream &ofst)
 {
 	ofst << endl << "Beast and Bird" << endl << endl;
 }
 
-void beast::MultiMethod(animal *other, ofstream &ofst) 
+void beast::MultiMethod(animal *other, ostream &ofst) 
 {
 	other->MMBeast(ofst);
 }
 
-void beast::MMFish(ofstream &ofst) 
+void beast::MMFish(ostream &ofst) 
 {
 	ofst << endl << "Fish and Beast" << endl << endl;
 }
 
-void beast::MMBird(ofstream &ofst) 
+void beast::MMBird(ostream &ofst) 
 {
 	ofst << endl << "Bird and Beast" << endl << endl;
 }
 
-void beast::MMBeast(ofstream &ofst) 
+void beast::MMBeast(ostream &ofst) 
 {
 	ofst << endl << "Beast and Beast" << endl << endl;
 }
 
-void container::MultiMethod(ofstream &ofst) 
+void container::MultiMethod(ostream &ofst) 
 {
 	ofst << "Multimethod." << endl;
 	animal *a1;
