@@ -85,6 +85,7 @@ public:
 
 	void In(ifstream &ifst);  // ввод фигур
 	void Out(ostream &ofst);  // вывод фигур
+	void OutCont(ostream &ofst);
 	void OutFish(ostream &ofst);
 	void OutBird(ostream &ofst);
 	void OutBeast(ostream &ofst);

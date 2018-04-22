@@ -21,6 +21,49 @@ void container::In(ifstream &ifst)
 	}
 }
 
+void container::OutCont(ostream &ofst) {
+	int k = 0;
+	int k1 = 0;
+	while (k1 != 1) {
+		cout << "Input number:" << endl;
+		cout << "1 - Out all elements" << endl;
+		cout << "2 - Out only fish" << endl;
+		cout << "3 - Out only bird" << endl;
+		cout << "4 - Out only beast" << endl;
+		cout << "0 - exit" << endl;
+		cin >> k;
+		if (cout.fail())
+		{
+			cout << "Wrong input!" << endl;
+			exit(1);
+		}
+		if (k < 0 || k > 4) {
+			cout << "Incorrect choice! Try again!" << endl;
+			continue;
+		}
+		else {
+			k1 = 1;
+			switch (k)
+			{
+			case 1:
+				Out(ofst);
+				break;
+			case 2:
+				OutFish(ofst);
+				break;
+			case 3:
+				OutBird(ofst);
+				break;
+			case 4:
+				OutBeast(ofst);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
+
 void container::Out(ostream &ofst)
 {
 	CheckOutputFile(ofst);

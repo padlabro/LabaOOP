@@ -26,35 +26,29 @@ int main(int argc, char* argv[])
 	c.In(ifst);
 	
 	int k1 = 10;
-	int k = 10;
-	while (k != 0) {
+	int menu = 10;
+	while (menu != 0) {
 
 		cout << "Input number:" << endl;
-		cout << "1 - Out container" << endl;
-		cout << "2 - Sort and out container" << endl;
-		cout << "3 - Out only fish" << endl;
-		cout << "4 - Out only birf" << endl;
-		cout << "5 - Out only beast" << endl;
-		cout << "6 - Multimethod" << endl;
-		cout << "7 - Clear and out container" << endl;
+		cout << "1 - Sort container" << endl;
+		cout << "2 - Out container" << endl;
+		cout << "3 - Multimethod" << endl;
+		cout << "4 - Clear container" << endl;
 		cout << "0 - exit" << endl;
-		cin >> k;
+		cin >> menu;
 		if (cout.fail())
 		{
 			cout << "Wrong input!" << endl;
 			exit(1);
 		}
-		if (k < 0 || k > 7) {
+		if (menu < 0 || menu > 4) {
 			cout << "Incorrect choice! Try again!" << endl;
 			continue;
 		}
 		else {
-			switch (k)
+			switch (menu)
 			{
 			case 1:
-				c.Out(ofst);
-				break;
-			case 2:
 				cout << "Input number:" << endl;
 				cout << "0 - from small to big" << endl;
 				cout << "1 - from big to small" << endl;
@@ -72,34 +66,16 @@ int main(int argc, char* argv[])
 						continue;
 					}
 				}
-				switch (k1)
-				{
-				case 0:
-					c.Sort(0);
-					break;
-				case 1:
-					c.Sort(1);
-					break;
-				default:
-					break;
-				}
-				c.Out(ofst);
+				c.Sort(k1);
+				break;
+			case 2:
+				c.OutCont(ofst);
 				break;
 			case 3:
-				c.OutFish(ofst);
-				break;
-			case 4:
-				c.OutBird(ofst);
-				break;
-			case 5:
-				c.OutBeast(ofst);
-				break;
-			case 6:
 				c.MultiMethod(ofst);
 				break;
-			case 7:
+			case 4:
 				c.Clear();
-				c.Out(ofst);
 				break;
 			default:
 				break;
